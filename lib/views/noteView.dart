@@ -13,12 +13,16 @@ class Noteview extends StatelessWidget {
   Widget build(BuildContext context){
 return Scaffold(
 appBar: AppBar(title: Text( note.title),),
-body: Padding(padding: EdgeInsets.all(16.0),
-child: Column(
-  children: [
-    Text(note.content)
-  ],
-),),
+body: SingleChildScrollView(
+  child: Padding(
+    padding:
+     EdgeInsets.all(16.0),
+  child: Column(
+    children: [
+      Text(note.content)
+    ],
+  ),),
+),
 );
   }
 }

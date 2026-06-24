@@ -13,46 +13,48 @@ class add_Note extends StatelessWidget {
       backgroundColor: Color(0x577904),
       appBar: AppBar(title: Text("Add note"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight(700),
-                color: Colors.white
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight(700),
+                  color: Colors.white
+                ),
+                controller: titleContext,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Enter a title...",
+                   hintStyle: TextStyle(fontSize: 24, color: Colors.grey.shade300),
+                   
+                ),
+                maxLines: 2,
               ),
-              controller: titleContext,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Enter a title...",
-                 hintStyle: TextStyle(fontSize: 24, color: Colors.grey.shade300),
-                 
-              ),
-              maxLines: 2,
-            ),
+          
         
-
-        //Text body
-            TextField(
-              controller: contentContext,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "write something...",
-                hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade300)
-              ),
-              maxLines: null,
-              
-              
-            )
-        
-          ],
+          //Text body
+              TextField(
+                controller: contentContext,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "write something...",
+                  hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade300)
+                ),
+                maxLines: null,
+                
+                
+              )
+          
+            ],
+          ),
         ),
       ),
       floatingActionButton: Container(
