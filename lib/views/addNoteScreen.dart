@@ -10,7 +10,7 @@ class add_Note extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0x577904),
+      backgroundColor: Color(0xFF577904),
       appBar: AppBar(title: Text("Add note"),
       ),
       body: SingleChildScrollView(
@@ -59,10 +59,10 @@ class add_Note extends StatelessWidget {
       ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Color(0xA5B500), Color(0x103202) ])
+          gradient: LinearGradient(colors: [Color(0xFFA5B500), Color(0xFF103202) ])
         ),
         child: FloatingActionButton(
-          backgroundColor: Color(0xA9FE91),
+          backgroundColor: Color(0xFFA9FE91),
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(999)
