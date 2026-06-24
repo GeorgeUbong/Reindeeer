@@ -1,17 +1,26 @@
-# reindeer
+## About
 
-A new Flutter project.
+Reindeer is a simple and intuitive note-taking application built with Flutter. It allows users to quickly create, view, and manage their personal notes with a clean and minimal interface.
 
-## Getting Started
+The app focuses on simplicity and productivity, providing an easy way to capture ideas, store important information, and access notes whenever needed.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Create and save notes
+- View notes in a clean list layout
+- Open notes in a detailed view
+- Delete unwanted notes
+- Search through notes
+- Responsive and modern UI
+- Local state management using Provider
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Built With
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- Provider (State Management)
+- MVVM Architecture
+
+## Purpose
+
+Reindeer was created as a lightweight note management solution focused on learning Flutter architecture, state management, and building practical mobile applications with a scalable structure.
