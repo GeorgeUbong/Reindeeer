@@ -42,23 +42,29 @@ class Onboard extends StatelessWidget {
                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 24, 97, 26),
-                  padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.5)
-                ),
-                onPressed: (){
-                  Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => const HomeScreen()));
-                }, 
-              child: Text("Get started",
-               style: 
-               TextStyle(
-                color: Colors.white,
-               fontSize: 22
-               ),
-               )
-               ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xA5B500), Color(0x103202) ])
+                    ),
+                    child: ElevatedButton(
+                                    style: TextButton.styleFrom(
+                                     // backgroundColor: const Color.fromARGB(255, 24, 97, 26),
+                    padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.5)
+                                    ),
+                                    onPressed: (){
+                    Navigator.push(context,
+                     MaterialPageRoute(builder: (context) => const HomeScreen()));
+                                    }, 
+                                  child: Text("Get started",
+                                   style: 
+                                   TextStyle(
+                                    color: Colors.white,
+                                   fontSize: 22
+                                   ),
+                                   )
+                                   ),
+                  ),
                 ],
               ),
               
