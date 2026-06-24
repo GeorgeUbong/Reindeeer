@@ -10,8 +10,11 @@ class add_Note extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0x577904),
-      appBar: AppBar(title: Text("Add note"),
+      backgroundColor: Color(0xFF577904),
+      
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Text(""),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -55,27 +58,22 @@ class add_Note extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Color(0xA5B500), Color(0x103202) ])
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 56, 255, 2),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(999)
         ),
-        child: FloatingActionButton(
-          backgroundColor: Color(0xA9FE91),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(999)
-          ),
-          onPressed: (){
-        
-           final title = titleContext.text;
-           final content = contentContext.text;
-        
-           context.read<NotesViewModel>().addNote(title, content);
-           Navigator.pop(context);
-          },
-          child: Icon(Icons.check),
-          ),
-      ),
+        onPressed: (){
+      
+         final title = titleContext.text;
+         final content = contentContext.text;
+      
+         context.read<NotesViewModel>().addNote(title, content);
+         Navigator.pop(context);
+        },
+        child: Icon(Icons.check),
+        ),
     );
   }
 }

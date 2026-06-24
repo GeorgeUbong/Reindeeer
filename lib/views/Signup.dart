@@ -44,12 +44,21 @@ class Onboard extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xA5B500), Color(0x103202) ])
+                      borderRadius: BorderRadius.circular(99.0),
+                      gradient: LinearGradient(colors: 
+                      [
+                        Color(0xFFA5B500),
+                        Color(0xFF778B04),
+                        Color(0xFF103202),
+
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight)
                     ),
                     child: ElevatedButton(
                                     style: TextButton.styleFrom(
-                                     // backgroundColor: const Color.fromARGB(255, 24, 97, 26),
+                                      elevation: 0,
+                                     backgroundColor: Colors.transparent,
                     padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.5)
                                     ),
                                     onPressed: (){
