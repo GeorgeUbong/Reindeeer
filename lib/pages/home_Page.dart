@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../viewModel/notes_ViewModel.dart';
+import './addNote_Page.dart';
 
 class homePage extends StatelessWidget {
   const homePage({super.key});
@@ -31,7 +32,14 @@ class homePage extends StatelessWidget {
               trailing: Text('hello'),
             ),
           );
-        })
+        }
+  
+        ),
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (context) => AddnotePage())
+          );
+        }, child: Icon(Icons.add), ),
     );
   }
 }
