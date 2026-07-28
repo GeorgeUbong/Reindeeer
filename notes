@@ -1,0 +1,8 @@
+- start page
+- notes home page with notes list
+- aadd notepage
+
+ListTile(
+            title: Text(note.title),
+            subtitle: Text(note.content),
+          );
