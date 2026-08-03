@@ -35,7 +35,8 @@ class NoteviewPage extends StatelessWidget {
                   icon: Icon(Icons.arrow_back))
                 ),
             CircleAvatar(
-              child: IconButton( tooltip: 'options', 
+              child: IconButton( 
+              tooltip: 'options', 
               onPressed:(){
                 slideUp(context);
               }, icon: Icon(Icons.more_vert)),
@@ -69,7 +70,16 @@ class NoteviewPage extends StatelessWidget {
 void slideUp(BuildContext context){
   showModalBottomSheet(context: context,
    builder: (BuildContext context) =>
-   ElevatedButton(onPressed: (){
-   // notifier.deleteNote(id)
-   }, child: Text('Delete Note')) );
+   Column(
+     children: [
+       ElevatedButton(onPressed: (){
+       // notifier.deleteNote(id)
+       }, child: Text('Delete Note')),
+
+       //edit
+       ElevatedButton(onPressed: (){
+       // notifier.deleteNote(id)
+       }, child: Text('Edit Note')),
+     ],
+   ) );
 }
