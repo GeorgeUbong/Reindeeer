@@ -42,7 +42,8 @@ class _homePageState extends State<homePage> {
               onTap: (){
                 Navigator.push(
                   context,
-                   MaterialPageRoute(builder: (context) => NoteviewPage(note: note))
+                   MaterialPageRoute(builder: (context) =>
+                    NoteviewPage(note: note, notifier: notifier,))
                    );
               },
                child: Container(
