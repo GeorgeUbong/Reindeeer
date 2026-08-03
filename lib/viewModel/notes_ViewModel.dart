@@ -5,11 +5,22 @@ import 'package:flutter/material.dart';
 import '../model/note_Model.dart';
 
 class listModel extends ChangeNotifier {
-  List<Note> notes = [Note(id: 1, title: 'myage', content: 'content')];
+  List<Note> notes = [
+    //Note(id: 1, title: 'myage', content: 'content', createdAt: )
+    ];
 
   //add a note
   void addNote(String title, String content) {
-    notes.add(Note(id: notes.length + 1, title: title, content: content));
+    notes.add(
+      Note(
+        id: notes.length + 1,
+        title: title,
+        content: content,
+       // updatedAt: DateTIme.
+        createdAt: DateTime.now()
+
+          )
+          );
     notifyListeners();
   }
 
@@ -41,11 +52,12 @@ class listModel extends ChangeNotifier {
     required int id,
     required String title,
     required String content,
+    required DateTime createdAt,
   }) {
     final newNote = notes.indexWhere((notes) => notes.id == id);
 
     if (id != -1) {
-      notes[newNote] = Note(id: notes[newNote].id, title: title, content: content);
+      notes[newNote] = Note(id: notes[newNote].id, title: title, content: content, createdAt: createdAt);
     }
   }
 }
