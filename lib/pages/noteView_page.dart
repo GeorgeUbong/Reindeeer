@@ -11,7 +11,7 @@ class NoteviewPage extends StatelessWidget {
 
   @override
   //final note = notes.firstWhere((n) => n.id == noteId);
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       body: SafeArea(
         child: Padding(

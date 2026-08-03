@@ -37,17 +37,51 @@ class StartPage extends StatelessWidget {
 
               SizedBox(height: 100),
 
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 140, vertical: 20),
+              /**Ink(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: 
+                      [
+                        Color(0xfff857D04), 
+                        Color(0xfff383A02)
+                         ],
+                         begin: AlignmentGeometry.topStart,
+                         end: Alignment.bottomRight
+                         ),
+                  ), */
+
+              Container(
+                
+                decoration: BoxDecoration(
+                  
+                 borderRadius: BorderRadius.circular(999),
+                  gradient: LinearGradient(
+                      colors: 
+                      [
+                        Color(0xfff857D04), 
+                        Color(0xfff383A02)
+                         ],
+                         begin: AlignmentGeometry.topStart,
+                         end: Alignment.bottomRight
+                         ),
                 ),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => homePage()),
-                  );
-                },
-                child: Text('Get started', style: TextStyle(fontSize: 18)),
+                child: ElevatedButton(
+                  
+                  style: ElevatedButton.styleFrom(
+                    
+                    padding: EdgeInsets.symmetric(horizontal: 140, vertical: 20),
+                    shadowColor: Colors.transparent,
+                    backgroundColor: Colors.transparent
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => homePage()),
+                    );
+                  },
+                  
+                    child: Text('Get started', style: TextStyle(fontSize: 18, color: Colors.white)),
+                ),
               ),
               Spacer(),
             ],
