@@ -1,8 +1,7 @@
-- start page
-- notes home page with notes list
-- aadd notepage
-
-ListTile(
-            title: Text(note.title),
-            subtitle: Text(note.content),
-          );
+Finished building first version of the application
+(Bo Storage Model)
+things noted during testing
+- accessibility concerns for different device models
+- text spacing and so on for buttons
+- use a streamlined styling provider (materialApp) or just style the raw widgets 
+- CRUD functions work seamlessly

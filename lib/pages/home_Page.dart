@@ -25,13 +25,13 @@ class _homePageState extends State<homePage> {
             fillColor: Color(0xfffE8E8E8),
             hintText: 'Search a note...',
             suffixIcon: Icon(Icons.search),
-
+        
             //not active
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
             ),
-
+        
             //active
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
