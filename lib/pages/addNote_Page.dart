@@ -24,7 +24,7 @@ class AddnotePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    backgroundColor: Color(0xfffE0CDB7),
+                    backgroundColor: Color.fromARGB(255, 255, 255, 255),
                     child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -44,49 +44,53 @@ class AddnotePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  TextField(
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    controller: _title,
-                    decoration: InputDecoration(
-                      hintText: 'Enter title',
-                      hintStyle: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 218, 218, 218),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        controller: _title,
+                        decoration: InputDecoration(
+                          hintText: 'Enter title',
+                          hintStyle: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 218, 218, 218),
+                          ),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
                       ),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                    ),
-                  ),
-                  TextField(
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    controller: _content,
-                    decoration: InputDecoration(
-                      hintText: 'Enter notes',
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      hintStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 218, 218, 218),
+                      TextField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        controller: _content,
+                        decoration: InputDecoration(
+                          hintText: 'Enter notes',
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 218, 218, 218),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),

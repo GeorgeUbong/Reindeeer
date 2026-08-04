@@ -51,49 +51,55 @@ class EditNotePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  TextField(
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    controller: _title,
-                    decoration: InputDecoration(
-                      hintText: note.title,
-                      hintStyle: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 218, 218, 218),
+
+              //body
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        controller: _title,
+                        decoration: InputDecoration(
+                          hintText: note.title,
+                          hintStyle: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 218, 218, 218),
+                          ),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
                       ),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                    ),
-                  ),
-                  TextField(
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    controller: _content,
-                    decoration: InputDecoration(
-                      hintText: note.content,
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      hintStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 218, 218, 218),
+                      TextField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        controller: _content,
+                        decoration: InputDecoration(
+                          hintText: note.content,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 218, 218, 218),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),

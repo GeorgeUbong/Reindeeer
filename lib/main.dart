@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/start_page.dart';
 
-void main(){
+void main() {
   runApp(MyApp());
 }
 
@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     theme: ThemeData(
-      useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.green)
-     ),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+      ),
       home: StartPage(),
     );
   }
