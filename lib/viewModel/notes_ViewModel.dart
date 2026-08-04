@@ -7,7 +7,7 @@ import '../model/note_Model.dart';
 class listModel extends ChangeNotifier {
   List<Note> notes = [
     //Note(id: 1, title: 'myage', content: 'content', createdAt: )
-    ];
+  ];
 
   //add a note
   void addNote(String title, String content) {
@@ -16,11 +16,10 @@ class listModel extends ChangeNotifier {
         id: notes.length + 1,
         title: title,
         content: content,
-       // updatedAt: DateTIme.
-        createdAt: DateTime.now()
-
-          )
-          );
+        // updatedAt: DateTIme.
+        createdAt: DateTime.now(),
+      ),
+    );
     notifyListeners();
   }
 
@@ -57,7 +56,14 @@ class listModel extends ChangeNotifier {
     final newNote = notes.indexWhere((notes) => notes.id == id);
 
     if (id != -1) {
-      notes[newNote] = Note(id: notes[newNote].id, title: title, content: content, createdAt: createdAt);
+      notes[newNote] = Note(
+        id: notes[newNote].id,
+        title: title,
+        content: content,
+        createdAt: createdAt,
+      );
     }
+    notifyListeners();
+    return print('note updated');
   }
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:reindeer/pages/home_page.dart';
 import 'package:reindeer/viewModel/notes_ViewModel.dart';
+import '../model/note_Model.dart';
 
-class AddnotePage extends StatelessWidget {
+class EditNotePage extends StatelessWidget {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
   final listModel notifier;
+  final Note note;
 
-  AddnotePage({super.key, required this.notifier});
+  EditNotePage({super.key, required this.notifier, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,12 @@ class AddnotePage extends StatelessWidget {
                   CircleAvatar(
                     child: IconButton(
                       onPressed: () {
-                        notifier.addNote(_title.text, _content.text);
+                        notifier.updateNote(
+                          id: note.id,
+                          title: _title.text,
+                          content: _content.text,
+                          createdAt: DateTime.now(),
+                        );
                         Navigator.pop(context);
                       },
                       icon: Icon(Icons.check),
@@ -56,7 +63,7 @@ class AddnotePage extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     controller: _title,
                     decoration: InputDecoration(
-                      hintText: 'Enter title',
+                      hintText: note.title,
                       hintStyle: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -76,7 +83,7 @@ class AddnotePage extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     controller: _content,
                     decoration: InputDecoration(
-                      hintText: 'Enter notes',
+                      hintText: note.content,
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       hintStyle: TextStyle(

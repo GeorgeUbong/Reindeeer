@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './home_Page.dart';
+import 'package:reindeer/pages/editNote_page.dart';
+import 'home_page.dart';
 import '../model/note_Model.dart';
 import '../viewModel/notes_ViewModel.dart';
 
@@ -11,17 +12,23 @@ class NoteviewPage extends StatelessWidget {
 
   @override
   //final note = notes.firstWhere((n) => n.id == noteId);
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              Container(
+                margin: EdgeInsetsDirectional.symmetric(vertical: 10),
+                child: Text(note.createdAt.toString().substring(0, 19)),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
+                    backgroundColor: Colors.white,
                     child: IconButton(
                       tooltip: 'go back',
                       onPressed: () {
@@ -31,7 +38,7 @@ class NoteviewPage extends StatelessWidget {
                     ),
                   ),
 
-                  CircleAvatar(
+                  /** CircleAvatar(
                     child: IconButton(
                       onPressed: () {
                         notifier.deleteNote(note.id);
@@ -39,12 +46,12 @@ class NoteviewPage extends StatelessWidget {
                       },
                       icon: Icon(Icons.delete),
                     ),
-                  ),
+                  ), */
                   CircleAvatar(
                     child: IconButton(
                       tooltip: 'options',
                       onPressed: () {
-                        slideUp(context);
+                        slideUp(context, note, notifier);
                       },
                       icon: Icon(Icons.more_vert),
                     ),
@@ -54,10 +61,13 @@ class NoteviewPage extends StatelessWidget {
               SizedBox(height: 30),
 
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //  crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     note.title,
+                    /**note.title.isNotEmpty == true
+                        ? note.title!
+                        : 'No title added...', */
                     textAlign: TextAlign.right,
                     style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                   ),
@@ -80,7 +90,7 @@ class NoteviewPage extends StatelessWidget {
 }
 
 //bottomsheet
-void slideUp(BuildContext context) {
+void slideUp(BuildContext context, Note note, listModel notifier) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) => Container(
@@ -90,14 +100,28 @@ void slideUp(BuildContext context) {
 
       child: Column(
         children: [
-          ElevatedButton(onPressed: () {}, child: Text('Delete Note')),
-
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      EditNotePage(notifier: notifier, note: note),
+                ),
+              );
+            },
+            child: Text('Edit Note'),
+          ),
           //edit
           ElevatedButton(
             onPressed: () {
-              //     notifier.deleteNote(id)
+              notifier.deleteNote(note.id);
+              Navigator.pop(
+                context,
+                MaterialPageRoute(builder: ((context) => homePage())),
+              );
             },
-            child: Text('Edit Note'),
+            child: Text('Delete Note'),
           ),
         ],
       ),
