@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:reindeer/viewModel/noteViewModel.dart';
 //import 'package:reindeer/pages/home_page.dart';
 //import 'package:reindeer/viewModel/notes_ViewModel.dart';
 import '../model/note_Model.dart';
-import '../service/hiveService.dart';
+//import '../service/hiveService.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class EditNotePage extends StatelessWidget {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
-  //final listModel notifier;
+  final NoteList viewModel;
   final Note note;
 
-  EditNotePage({
-    super.key,
-    // required this.notifier,
-     required this.note});
+  EditNotePage({super.key, required this.viewModel, required this.note});
 
-  final Hiveservice service = Hiveservice();
   @override
   Widget build(BuildContext context) {
     // final listModel notifier = listModel();
-    final box = Hive.box<Note>("notes");
+    //final box = Hive.box<Note>("notes");
 
-    final index = box.values.toList().indexWhere((n) => n.id == note.id,);
+    final index = viewModel.notes.toList().indexWhere((n) => n.id == note.id);
 
     return Scaffold(
       backgroundColor: Color(0xfff577904),
@@ -47,14 +44,10 @@ class EditNotePage extends StatelessWidget {
                   CircleAvatar(
                     child: IconButton(
                       onPressed: () async {
-                        await service.updateNote(
-                          index,
-                          Note(
-                            id: note.id,
-                            title: _title.text,
-                            content: _content.text,
-                            createdAt: note.createdAt
-                            )
+                        await viewModel.updateNote(
+                          note.id,
+                          _title.text,
+                          _content.text,
                         );
                         Navigator.pop(context);
                       },

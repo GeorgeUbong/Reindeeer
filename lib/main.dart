@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/start_page.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import './model/note_Model.dart';
+
+
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  //initialize
-  await Hive.initFlutter();
-
-  Hive.registerAdapter(NoteAdapter());
-
-  //expose notes db
-  await Hive.openBox<Note>("notes");
-
   runApp(MyApp());
 }
 

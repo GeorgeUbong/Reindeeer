@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reindeer/pages/noteView_page.dart';
 import './addNote_Page.dart';
-import '../service/hiveService.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '../model/note_Model.dart';
-//import './noteView_page.dart';
+import '../viewModel/noteViewModel.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -15,11 +13,16 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   //create notifier variable
- // final listModel notifier = listModel();
+  // final listModel notifier = listModel();
 
-  final Hiveservice service = Hiveservice();
-  
+  final NoteList viewModel = NoteList();
+
   @override
+  void initState() {
+    super.initState();
+    viewModel.getNotes();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +60,7 @@ class _homePageState extends State<homePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => AddnotePage(),
+                    builder: (_) => AddnotePage(viewModel: viewModel),
                   ),
                 );
               },
@@ -73,56 +76,64 @@ class _homePageState extends State<homePage> {
             ),
             SizedBox(height: 30),
             Expanded(
-              child: ValueListenableBuilder(
-                valueListenable: Hive.box<Note>("notes").listenable(),
-                builder: (BuildContext, box, child) {
-                  final notes = service.getNotes();
-
-                  if (notes.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.hourglass_empty),
-                          SizedBox(height: 10),
-                          Text('You have not written anything yet!'),
-                        ],
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    itemCount: notes.length,
-                    itemBuilder: (context, index) {
-                      final note = notes[index];
-
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NoteviewPage(note: note),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(color: Colors.white),
-                          child: ListTile(
-                            title: Text(note.title),
-                            subtitle: Text(
-                              note.content.length > 70
-                                  ? '${note.content.substring(0, 70)}...'
-                                  : note.content,
-                            ),
-                            trailing: Text(
-                              note.createdAt.toString().substring(0, 19) 
-                            ),
-                          ),
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await viewModel.getNotes();
+                },
+                child: ListenableBuilder(
+                  listenable: viewModel,
+                  builder: (context, _) {
+                    if (viewModel.isLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (viewModel.notes.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.hourglass_empty),
+                            SizedBox(height: 10),
+                            Text('You have not written anything yet!'),
+                          ],
                         ),
                       );
-                    },
-                  );
-                },
+                    }
+                    return ListView.builder(
+                      itemCount: viewModel.notes.length,
+                      itemBuilder: (context, index) {
+                        final note = viewModel.notes[index];
+
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NoteviewPage(
+                                  note: note,
+                                  viewModel: viewModel,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: ListTile(
+                              title: Text(note.title),
+                              subtitle: Text(
+                                note.content.length > 70
+                                    ? '${note.content.substring(0, 70)}...'
+                                    : note.content,
+                              ),
+                              trailing: Text(
+                                note.createdAt.toString().substring(0, 19),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -137,7 +148,9 @@ class _homePageState extends State<homePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => AddnotePage()),
+            MaterialPageRoute(
+              builder: (_) => AddnotePage(viewModel: viewModel),
+            ),
           );
         },
         child: Icon(Icons.add, color: Colors.white),

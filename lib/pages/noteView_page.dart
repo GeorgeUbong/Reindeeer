@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:reindeer/pages/editNote_page.dart';
 import 'package:reindeer/pages/home_Page.dart';
+import 'package:reindeer/viewModel/noteViewModel.dart';
 //import 'home_page.dart';
 import '../model/note_Model.dart';
 //import '../viewModel/notes_ViewModel.dart';
-import '../service/hiveService.dart';
+//import '../service/hiveService.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 //import '../model/note_Model.dart';
 
 class NoteviewPage extends StatelessWidget {
   final Note note;
-  // final listModel notifier;
+  final NoteList viewModel;
 
-  NoteviewPage({
-    super.key,
-    required this.note,
-    //  required this.notifier
-  });
+  NoteviewPage({super.key, required this.note, required this.viewModel});
 
   @override
   //final note = notes.firstWhere((n) => n.id == noteId);
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: Hive.box<Note>("notes").listenable(),
-      builder: (context, box, child) {
-        final updatedNote = box.values.firstWhere((n) => n.id == note.id);
+    return ListenableBuilder(
+      listenable: viewModel,
+      builder: (context, _) {
+        final updatedNote = viewModel.notes.firstWhere((n) => n.id == note.id);
 
         return Scaffold(
           backgroundColor: const Color.fromARGB(255, 240, 240, 240),
@@ -35,9 +32,17 @@ class NoteviewPage extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsetsDirectional.symmetric(vertical: 10),
-                    child: Text(
-                      "Created at ${note.createdAt.day}/${note.createdAt.month}/${note.createdAt.year}",
-                      style: TextStyle(color: Colors.grey),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Created at ${note.createdAt.day}/${note.createdAt.month}/${note.createdAt.year}",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        Text(
+                          "Updated at ${note.updatedAt.hour}:${note.updatedAt.day}:${note.updatedAt.month}:${note.updatedAt.year}",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
                     ),
                   ),
                   Row(
@@ -124,12 +129,9 @@ class NoteviewPage extends StatelessWidget {
 
 //bottomsheet
 void showNoteActions(BuildContext context, Note note) {
-  final Hiveservice service = Hiveservice();
-  final box = Hive.box<Note>("notes");
+  final NoteList viewModel = NoteList();
 
-final index = box.values.toList().indexWhere(
-  (n) => n.id == note.id,
-);
+  final index = viewModel.notes.toList().indexWhere((n) => n.id == note.id);
 
   showDialog(
     context: context,
@@ -159,7 +161,8 @@ final index = box.values.toList().indexWhere(
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => EditNotePage(note: note),
+                        builder: (_) =>
+                            EditNotePage(note: note, viewModel: viewModel),
                       ),
                     );
                   },
@@ -178,10 +181,12 @@ final index = box.values.toList().indexWhere(
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () async {
-                    await service.deleteNote(index);
-                    
-                    Navigator.pop(context, 
-                    MaterialPageRoute(builder: (context) => homePage())); // Close NoteViewPage
+                    await viewModel.deleteNote(note.id);
+
+                    Navigator.pop(
+                      context,
+                      MaterialPageRoute(builder: (context) => homePage()),
+                    ); // Close NoteViewPage
                   },
                 ),
               ),
