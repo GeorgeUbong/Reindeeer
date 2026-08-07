@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reindeer/pages/editNote_page.dart';
-import 'package:reindeer/pages/home_Page.dart';
+import 'package:reindeer/pages/home_page.dart';
 import 'package:reindeer/viewModel/noteViewModel.dart';
 //import 'home_page.dart';
 import '../model/note_Model.dart';
@@ -73,7 +73,7 @@ class NoteviewPage extends StatelessWidget {
                         child: IconButton(
                           tooltip: 'options',
                           onPressed: () {
-                            showNoteActions(context, note);
+                            showNoteActions(context, updatedNote, viewModel);
                           },
                           icon: Icon(Icons.more_vert),
                         ),
@@ -128,10 +128,10 @@ class NoteviewPage extends StatelessWidget {
 }
 
 //bottomsheet
-void showNoteActions(BuildContext context, Note note) {
-  final NoteList viewModel = NoteList();
+void showNoteActions(BuildContext context, Note note, NoteList viewModel) {
+  // final NoteList viewModel = NoteList();
 
-  final index = viewModel.notes.toList().indexWhere((n) => n.id == note.id);
+  // final index = viewModel.notes.toList().indexWhere((n) => n.id == note.id);
 
   showDialog(
     context: context,
@@ -182,11 +182,9 @@ void showNoteActions(BuildContext context, Note note) {
                   ),
                   onPressed: () async {
                     await viewModel.deleteNote(note.id);
+                    Navigator.pop(context);
 
-                    Navigator.pop(
-                      context,
-                      MaterialPageRoute(builder: (context) => homePage()),
-                    ); // Close NoteViewPage
+                    Navigator.pop(context); // Close NoteViewPage
                   },
                 ),
               ),

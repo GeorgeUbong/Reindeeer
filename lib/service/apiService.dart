@@ -31,7 +31,7 @@ class ApiService {
     }
   }
 
-//update Note
+  //update Note
   Future<void> updateNote(int id, String title, String content) async {
     final response = await http.put(
       Uri.parse("$baseUrl/$id"),
@@ -45,9 +45,7 @@ class ApiService {
 
   //delete Note
   Future<void> deleteNote(int id) async {
-    final response = await http.put(
-      Uri.parse("$baseUrl/$id"),
-    );
+    final response = await http.delete(Uri.parse("$baseUrl/$id"));
     if (response.statusCode != 200) {
       throw Exception("failed to update");
     }

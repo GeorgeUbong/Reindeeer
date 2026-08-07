@@ -125,7 +125,7 @@ class _homePageState extends State<homePage> {
                                     : note.content,
                               ),
                               trailing: Text(
-                                note.createdAt.toString().substring(0, 19),
+                                note.createdAt.toString().substring(10, 19),
                               ),
                             ),
                           ),
