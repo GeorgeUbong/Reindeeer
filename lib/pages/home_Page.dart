@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reindeer/pages/noteView_page.dart';
-import '../viewModel/notes_ViewModel.dart';
 import './addNote_Page.dart';
 import '../service/hiveService.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -16,9 +15,10 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   //create notifier variable
-  final listModel notifier = listModel();
-  final Hiveservice service = Hiveservice();
+ // final listModel notifier = listModel();
 
+  final Hiveservice service = Hiveservice();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
