@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+//import 'package:reindeer/model/note_Model.dart';
 //import 'package:reindeer/pages/home_page.dart';
-import 'package:reindeer/viewModel/notes_ViewModel.dart';
+//import 'package:reindeer/viewModel/notes_ViewModel.dart';
+import '../service/hiveService.dart';
+//import 'package:hive_flutter/hive_flutter.dart';
 
 class AddnotePage extends StatelessWidget {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
-  final listModel notifier;
+  //final listModel notifier;
 
-  AddnotePage({super.key, required this.notifier});
+  AddnotePage({
+    super.key,
+    //required this.notifier
+  });
+
+  final Hiveservice service = Hiveservice();
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +43,11 @@ class AddnotePage extends StatelessWidget {
 
                   CircleAvatar(
                     child: IconButton(
-                      onPressed: () {
-                        notifier.addNote(_title.text, _content.text);
+                      onPressed: () async {
+                        await service.addNote(
+                          title: _title.text,
+                          content: _content.text,
+                        );
                         Navigator.pop(context);
                       },
                       icon: Icon(Icons.check),

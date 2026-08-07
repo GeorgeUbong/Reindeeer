@@ -1,7 +1,20 @@
+//add hice type adapter
+import 'package:hive/hive.dart';
+part 'note_Model.g.dart';
+
+@HiveType(typeId: 0)
+
 class Note {
+  @HiveField(0)
   int id;
+
+  @HiveField(1)
   String title;
+
+  @HiveField(2)
   String content;
+
+  @HiveField(3)
   DateTime createdAt;
 
   Note({

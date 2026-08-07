@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:reindeer/pages/noteView_page.dart';
 import '../viewModel/notes_ViewModel.dart';
 import './addNote_Page.dart';
+import '../service/hiveService.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../model/note_Model.dart';
 //import './noteView_page.dart';
 
 class homePage extends StatefulWidget {
@@ -14,6 +17,7 @@ class homePage extends StatefulWidget {
 class _homePageState extends State<homePage> {
   //create notifier variable
   final listModel notifier = listModel();
+  final Hiveservice service = Hiveservice();
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +26,16 @@ class _homePageState extends State<homePage> {
         title: TextField(
           decoration: InputDecoration(
             filled: true,
-            fillColor: Color(0xfffE8E8E8),
+            fillColor: Color(0xfffe8e8e8),
             hintText: 'Search a note...',
             suffixIcon: Icon(Icons.search),
-        
+
             //not active
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
             ),
-        
+
             //active
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
@@ -53,7 +57,7 @@ class _homePageState extends State<homePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => AddnotePage(notifier: notifier),
+                    builder: (_) => AddnotePage(),
                   ),
                 );
               },
@@ -69,10 +73,12 @@ class _homePageState extends State<homePage> {
             ),
             SizedBox(height: 30),
             Expanded(
-              child: ListenableBuilder(
-                listenable: notifier,
-                builder: (BuildContext, Widget? child) {
-                  if (notifier.notes.isEmpty) {
+              child: ValueListenableBuilder(
+                valueListenable: Hive.box<Note>("notes").listenable(),
+                builder: (BuildContext, box, child) {
+                  final notes = service.getNotes();
+
+                  if (notes.isEmpty) {
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -85,9 +91,9 @@ class _homePageState extends State<homePage> {
                     );
                   }
                   return ListView.builder(
-                    itemCount: notifier.notes.length,
+                    itemCount: notes.length,
                     itemBuilder: (context, index) {
-                      final note = notifier.notes[index];
+                      final note = notes[index];
 
                       return GestureDetector(
                         onTap: () {
@@ -95,7 +101,7 @@ class _homePageState extends State<homePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  NoteviewPage(note: note, notifier: notifier),
+                                  NoteviewPage(note: note),
                             ),
                           );
                         },
@@ -109,8 +115,7 @@ class _homePageState extends State<homePage> {
                                   : note.content,
                             ),
                             trailing: Text(
-                              note.createdAt?.toString().substring(0, 19) ??
-                                  'Unavailable',
+                              note.createdAt.toString().substring(0, 19) 
                             ),
                           ),
                         ),
@@ -132,7 +137,7 @@ class _homePageState extends State<homePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => AddnotePage(notifier: notifier)),
+            MaterialPageRoute(builder: (_) => AddnotePage()),
           );
         },
         child: Icon(Icons.add, color: Colors.white),

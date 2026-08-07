@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 //import 'package:reindeer/pages/home_page.dart';
-import 'package:reindeer/viewModel/notes_ViewModel.dart';
+//import 'package:reindeer/viewModel/notes_ViewModel.dart';
 import '../model/note_Model.dart';
+import '../service/hiveService.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class EditNotePage extends StatelessWidget {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
-  final listModel notifier;
+  //final listModel notifier;
   final Note note;
 
-  EditNotePage({super.key, required this.notifier, required this.note});
+  EditNotePage({
+    super.key,
+    // required this.notifier,
+     required this.note});
 
+  final Hiveservice service = Hiveservice();
   @override
   Widget build(BuildContext context) {
     // final listModel notifier = listModel();
+    final box = Hive.box<Note>("notes");
+
+    final index = box.values.toList().indexWhere((n) => n.id == note.id,);
 
     return Scaffold(
       backgroundColor: Color(0xfff577904),
@@ -26,7 +35,7 @@ class EditNotePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    backgroundColor: Color(0xfffE0CDB7),
+                    backgroundColor: Color(0xfffe0cdb7),
                     child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -37,12 +46,15 @@ class EditNotePage extends StatelessWidget {
 
                   CircleAvatar(
                     child: IconButton(
-                      onPressed: () {
-                        notifier.updateNote(
-                          id: note.id,
-                          title: _title.text,
-                          content: _content.text,
-                          createdAt: DateTime.now(),
+                      onPressed: () async {
+                        await service.updateNote(
+                          index,
+                          Note(
+                            id: note.id,
+                            title: _title.text,
+                            content: _content.text,
+                            createdAt: note.createdAt
+                            )
                         );
                         Navigator.pop(context);
                       },

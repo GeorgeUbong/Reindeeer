@@ -58,8 +58,8 @@ class StartPage extends StatelessWidget {
                   gradient: LinearGradient(
                       colors: 
                       [
-                        Color(0xfff857D04), 
-                        Color(0xfff383A02)
+                        Color(0xfff857d04), 
+                        Color(0xfff383a02)
                          ],
                          begin: AlignmentGeometry.topStart,
                          end: Alignment.bottomRight
