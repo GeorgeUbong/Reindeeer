@@ -23,6 +23,7 @@ class _homePageState extends State<homePage> {
     viewModel.getNotes();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -13,7 +13,7 @@ class NoteviewPage extends StatelessWidget {
   final Note note;
   final NoteList viewModel;
 
-  NoteviewPage({super.key, required this.note, required this.viewModel});
+  const NoteviewPage({super.key, required this.note, required this.viewModel});
 
   @override
   //final note = notes.firstWhere((n) => n.id == noteId);
